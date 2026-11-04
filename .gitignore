@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Environment files and local secrets
+.env
+.env.*
+
+# Generated raw run data (large, host specific, never committed)
+runs/raw/
+
+# Logs
+*.log
+
+# Coverage
+coverage/
+
+# Bun runtime caches
+.bun/
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+
+# Hermes agent local state (plan drafts, scratch notes): never committed
+.hermes/
