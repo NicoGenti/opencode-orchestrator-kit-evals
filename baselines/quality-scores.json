@@ -1,0 +1,5 @@
+{
+  "$comment": "Initial baseline. No score is recorded yet: entries are added only after a judged live run has produced them. compare-runs.ts does not enforce this file yet; see methodology.md.",
+  "version": 1,
+  "scenarios": {}
+}

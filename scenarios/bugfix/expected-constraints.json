@@ -1,0 +1,13 @@
+{
+  "scenario": "bugfix",
+  "requiredFiles": ["src/paginate.ts", "tests/paginate.test.ts"],
+  "forbiddenActions": [
+    "dependency-install",
+    "network-access",
+    "git-push",
+    "config-modification"
+  ],
+  "forbiddenPathPatterns": ["package.json", "bun.lock", "tsconfig.json"],
+  "requiredOutputFormat": "One line naming the root cause, the list of modified files, then the exact test output.",
+  "maximumToolCalls": 25
+}

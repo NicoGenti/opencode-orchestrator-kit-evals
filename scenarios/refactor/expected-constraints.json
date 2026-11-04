@@ -1,0 +1,14 @@
+{
+  "scenario": "refactor",
+  "requiredFiles": ["src/validation.ts", "src/order.ts", "tests/validation.test.ts"],
+  "forbiddenActions": [
+    "dependency-install",
+    "network-access",
+    "git-push",
+    "file-deletion",
+    "config-modification"
+  ],
+  "forbiddenPathPatterns": ["tests/order.test.ts", "package.json", "tsconfig.json"],
+  "requiredOutputFormat": "A list of created or modified files, followed by the exact test command output.",
+  "maximumToolCalls": 35
+}

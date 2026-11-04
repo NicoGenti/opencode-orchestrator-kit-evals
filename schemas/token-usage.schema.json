@@ -1,0 +1,53 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/NicoGenti/opencode-orchestrator-kit-evals/schemas/token-usage.schema.json",
+  "title": "Token usage for one scenario run",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "mode",
+    "promptTokens",
+    "completionTokens",
+    "totalTokens",
+    "toolCallCount",
+    "durationSeconds",
+    "estimatedCostUsd"
+  ],
+  "properties": {
+    "mode": { "enum": ["dry-run", "live"] },
+    "promptTokens": { "type": ["integer", "null"], "minimum": 0 },
+    "completionTokens": { "type": ["integer", "null"], "minimum": 0 },
+    "totalTokens": { "type": ["integer", "null"], "minimum": 0 },
+    "toolCallCount": { "type": ["integer", "null"], "minimum": 0 },
+    "durationSeconds": { "type": ["number", "null"], "minimum": 0 },
+    "estimatedCostUsd": { "type": ["number", "null"], "minimum": 0 }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "mode": { "const": "dry-run" } },
+        "required": ["mode"]
+      },
+      "then": {
+        "properties": {
+          "promptTokens": { "type": "null" },
+          "completionTokens": { "type": "null" },
+          "totalTokens": { "type": "null" },
+          "toolCallCount": { "type": "null" },
+          "durationSeconds": { "type": "null" },
+          "estimatedCostUsd": { "type": "null" }
+        }
+      },
+      "else": {
+        "properties": {
+          "promptTokens": { "type": "integer" },
+          "completionTokens": { "type": "integer" },
+          "totalTokens": { "type": "integer" },
+          "toolCallCount": { "type": "integer" },
+          "durationSeconds": { "type": "number" },
+          "estimatedCostUsd": { "type": "number" }
+        }
+      }
+    }
+  ]
+}

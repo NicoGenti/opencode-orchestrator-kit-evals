@@ -1,0 +1,11 @@
+{
+  "id": "feature-request",
+  "description": "Add a deterministic slug helper to the fixture library and cover it with tests.",
+  "repositoryFixture": "fixtures/feature-request",
+  "fixtureStatus": "placeholder",
+  "modelProfile": "default",
+  "timeoutSeconds": 900,
+  "instructionsFile": "instructions.md",
+  "constraintsFile": "expected-constraints.json",
+  "expectedArtifacts": ["src/slug.ts", "tests/slug.test.ts"]
+}

@@ -1,0 +1,8 @@
+{
+  "scenario": "feature-request",
+  "requiredFiles": ["src/slug.ts", "tests/slug.test.ts"],
+  "forbiddenActions": ["dependency-install", "network-access", "git-push"],
+  "forbiddenPathPatterns": ["package.json", "bun.lock"],
+  "requiredOutputFormat": "A list of created or modified files, followed by the exact test command output.",
+  "maximumToolCalls": 30
+}

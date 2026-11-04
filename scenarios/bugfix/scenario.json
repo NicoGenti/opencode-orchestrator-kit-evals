@@ -1,0 +1,11 @@
+{
+  "id": "bugfix",
+  "description": "Fix an off-by-one pagination bug in the fixture library and add a regression test.",
+  "repositoryFixture": "fixtures/bugfix",
+  "fixtureStatus": "placeholder",
+  "modelProfile": "default",
+  "timeoutSeconds": 900,
+  "instructionsFile": "instructions.md",
+  "constraintsFile": "expected-constraints.json",
+  "expectedArtifacts": ["src/paginate.ts", "tests/paginate.test.ts"]
+}

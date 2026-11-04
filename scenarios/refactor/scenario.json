@@ -1,0 +1,11 @@
+{
+  "id": "refactor",
+  "description": "Extract duplicated validation logic into a shared module without changing observable behaviour.",
+  "repositoryFixture": "fixtures/refactor",
+  "fixtureStatus": "placeholder",
+  "modelProfile": "default",
+  "timeoutSeconds": 1200,
+  "instructionsFile": "instructions.md",
+  "constraintsFile": "expected-constraints.json",
+  "expectedArtifacts": ["src/validation.ts", "src/order.ts", "tests/validation.test.ts"]
+}
