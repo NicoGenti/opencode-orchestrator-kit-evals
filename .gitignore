@@ -4,6 +4,9 @@ node_modules/
 # Build output
 dist/
 
+# CI checkout of the kit under evaluation (present only inside a workflow run)
+.kit/
+
 # Environment files and local secrets
 .env
 .env.*

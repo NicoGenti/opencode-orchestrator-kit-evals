@@ -6,7 +6,11 @@ import globals from "globals";
 import tseslint from "typescript-eslint";
 
 export default tseslint.config(
-  { ignores: ["node_modules/**", "runs/**", "reports/**", "dist/**", "coverage/**"] },
+  {
+    // `.kit/**` is the CI checkout of the kit under evaluation: it is not part
+    // of this repository and it has its own ESLint configuration and plugins.
+    ignores: ["node_modules/**", "runs/**", "reports/**", "dist/**", "coverage/**", ".kit/**"],
+  },
   {
     files: ["scripts/**/*.ts", "tests/**/*.ts"],
     extends: [js.configs.recommended, ...tseslint.configs.recommended],
