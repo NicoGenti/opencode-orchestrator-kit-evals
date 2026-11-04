@@ -27,6 +27,8 @@
 | K3 | format | `bun run format:check` | exit 0 | worktree Windows: exit 1 su 114 file (CRLF vs `endOfLine: "lf"`); clone con `core.autocrlf=false` + prettier `3.3.3` del lockfile: exit 0, `All matched files use Prettier code style!` | PASS (misurato sul contenuto che la CI verifica) |
 | K4 | asset sincronizzati | `bun run sync-assets --check` | `plugin/assets matches 32 source files.` | exit 0, `plugin/assets matches 32 source files.` | PASS |
 | K5 | build docs | `bun run build` | exit 0 + `site/index.html` | exit 0, `✓ built in 5.61s`, `prepare-pages: wrote site\index.html, site\404.html (noindex), and site\sitemap.xml`, `site/index.html` 48.419 byte | PASS |
+| K3-CI | format sul contenuto che la CI verifica | workflow `Test` su `ubuntu-latest` | `success` | run [41855163967](https://github.com/NicoGenti/opencode-orchestrator-kit/actions/runs/41855163967) su `aa1a384`, conclusione `success` (include `bun run format:check`) | PASS |
+| K6 | contenuto del tarball | `npm pack plugin` + `tar -xzf` + grep | versione `1.1.0`, `files` = `src,types,assets`, `/quick` presente | `opencode-orchestrator-kit-1.1.0.tgz`, 45 file, `package.json` `1.1.0`, `files` = `src,types,assets`, `assets/commands/quick.md` presente (568 B), `assets/agents/orchestrator-quick.md` presente (4.089 B, 2 occorrenze di `one delegation`), `ROUTING_AGENTS` ×4 in `src/permissions.ts` | PASS |
 
 Valori ammessi: `PASS`, `FAIL`, `UNVERIFIED`. Nessun gate è `UNVERIFIED`.
 
@@ -113,15 +115,21 @@ K0, coda della suite del kit:
 Ran 1112 tests across 60 files. [76.93s]
 ```
 
-K1–K5:
+K6, contenuto del tarball `opencode-orchestrator-kit-1.1.0.tgz` (45 file):
 
 ```
-typecheck=0
-lint=0
-assets=0   plugin/assets matches 32 source files.
-build=0    ✓ built in 5.61s / prepare-pages: wrote site\index.html, site\404.html (noindex), and site\sitemap.xml
-format (worktree, autocrlf=true)=1 — 114 file
-format (clone core.autocrlf=false, prettier 3.3.3)=0 — All matched files use Prettier code style!
+version=1.1.0
+files=src,types,assets
+routing=4                       (package/src/permissions.ts)
+package/assets/commands/quick.md            568 B
+package/assets/agents/orchestrator-quick.md 4089 B, 'one delegation' x2
+```
+
+K3-CI, workflow `Test` su `ubuntu-latest` per `aa1a384`
+
+```
+gh run list --workflow=Test --limit 1 → aa1a384 success
+https://github.com/NicoGenti/opencode-orchestrator-kit/actions/runs/41855163967
 ```
 
 ## Decisione
@@ -133,5 +141,6 @@ artefatti validi e zero metriche inventate, e passa tutti i gate deterministici 
 ha prodotto alcuna misura di qualità, quindi questa decisione **non** si appoggia a metriche di
 qualità e va letta con la sezione "Cosa questa valutazione NON prova".
 
-Aggiornamento previsto prima del tag: gate K6 (contenuto del tarball dopo il bump) e K3-CI (workflow
-`Test` su `ubuntu-latest`).
+Aggiornamento registrato prima del tag: gate K6 (contenuto del tarball dopo il bump) e K3-CI
+(workflow `Test` su `ubuntu-latest`) sono entrambi `PASS`; nessun gate è `UNVERIFIED`. Il tag
+`v1.1.0` può essere creato su `aa1a384`.
