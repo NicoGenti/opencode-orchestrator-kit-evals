@@ -29,6 +29,7 @@
 | K5 | build docs | `bun run build` | exit 0 + `site/index.html` | exit 0, `✓ built in 5.61s`, `prepare-pages: wrote site\index.html, site\404.html (noindex), and site\sitemap.xml`, `site/index.html` 48.419 byte | PASS |
 | K3-CI | format sul contenuto che la CI verifica | workflow `Test` su `ubuntu-latest` | `success` | run [41855163967](https://github.com/NicoGenti/opencode-orchestrator-kit/actions/runs/41855163967) su `aa1a384`, conclusione `success` (include `bun run format:check`) | PASS |
 | K6 | contenuto del tarball | `npm pack plugin` + `tar -xzf` + grep | versione `1.1.0`, `files` = `src,types,assets`, `/quick` presente | `opencode-orchestrator-kit-1.1.0.tgz`, 45 file, `package.json` `1.1.0`, `files` = `src,types,assets`, `assets/commands/quick.md` presente (568 B), `assets/agents/orchestrator-quick.md` presente (4.089 B, 2 occorrenze di `one delegation`), `ROUTING_AGENTS` ×4 in `src/permissions.ts` | PASS |
+| K7 | pacchetto pubblicato sul registro | `npm pack opencode-orchestrator-kit@1.1.0` + `tar -xzf` + grep | `1.1.0`, `latest` = `1.1.0`, `gitHead` = commit di release, `/quick` presente | `npm view version` = `1.1.0`; `dist-tags` = `{"latest":"1.1.0"}`; `gitHead` = `aa1a38443485cf7f5ef8deedadae8591aa07ad21`; tarball pubblicato 45 file, `assets/commands/quick.md` 557 B, `one delegation` ×2, `ROUTING_AGENTS` ×4. Il packument ha servito `1.0.0` per ~45 s dopo il publish: la prova tempestiva è `https://registry.npmjs.org/opencode-orchestrator-kit/1.1.0` → `200` | PASS |
 
 Valori ammessi: `PASS`, `FAIL`, `UNVERIFIED`. Nessun gate è `UNVERIFIED`.
 
@@ -142,5 +143,6 @@ ha prodotto alcuna misura di qualità, quindi questa decisione **non** si appogg
 qualità e va letta con la sezione "Cosa questa valutazione NON prova".
 
 Aggiornamento registrato prima del tag: gate K6 (contenuto del tarball dopo il bump) e K3-CI
-(workflow `Test` su `ubuntu-latest`) sono entrambi `PASS`; nessun gate è `UNVERIFIED`. Il tag
-`v1.1.0` può essere creato su `aa1a384`.
+(workflow `Test` su `ubuntu-latest`) sono entrambi `PASS`. Dopo il tag, K7 registra il pacchetto
+pubblicato sul registro (`1.1.0`, `latest`, `gitHead` = `aa1a384`) e il suo contenuto. Nessun gate è
+`UNVERIFIED`.
